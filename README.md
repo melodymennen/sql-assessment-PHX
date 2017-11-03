@@ -3,15 +3,30 @@
 
 ## Setup
 
-  1. Run `npm install` to install dependencies.
-  2. Look over the files included in this assessment.
-    - You should notice that you already have a node server set up for you.
-    - **NOTE: Do *not* change the port. The Postman tests will only work on port `3000`.**
-  3. Create a database called `assessbox` on your postgres server.
-  4. In `server.js`, connect to the `assessbox` database using `massive.js` (see `server.js`, line 13).
+  1. Run `npm init` and create a package.json.
+  2. Install all needed NPM packages to have our server connect to a database.
+  3. Look over the files included in this assessment.
+    - You should notice that there is no server file. You will need to set up the basics of a node server.
+    - **NOTE: You *need* to run your server on port 3000. The Postman tests will only work on port `3000`.**
+  4. Create a database on heroku.
+  5. Using massive create a connection to your database.
+  6. Inside of your `.then` of your massive connection add these DB calls that will initiate your tables (The SQL files provided currently don't work, you will need to fix them.)
+
+<pre>
+.then( db => {
+  app.set('db', db);
+
+  // Initialize user table and vehicle table.
+  db.init_tables.user_create_seed().then( response => {
+    console.log('User table init');
+    db.init_tables.vehicle_create_seed().then( response => {
+      console.log('Vehicle table init');
+    })
+  })
+})
+</pre>
 
 ### Users
-
 
   Complete the unfinished **create table** statement in the `user_create_seed.sql` file. You need to add the datatype and/or constraints for each column.
   ```
